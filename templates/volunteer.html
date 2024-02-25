@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer</title>
+</head>
+<body>
+    {% if request.session.user_username %}
+    <p>Logged in as: {{ request.session.user_username }}</p>
+{% else %}
+    <p>Not logged in</p>
+{% endif %}
+    <form action="{% url 'volunteer' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="city">City: </label>
+            <select name="city" id="city" required>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Nadiad">Nadiad</option>
+                <option value="Junagadh">Junagadh</option>
+            </select>
+        </div>
+        <h2>Requirements: </h2>
+        <label for="food-name">Food Name</label>
+        <input type="text" name="foodname">
+
+        <label for="qty">Quantity: </label>
+        <input type="text" name="qty">
+
+        <label for="enddate">Due Date: </label>
+        <input type="date" name="duedate">
+        <div>
+            <button type="submit">Save</button>
+        </div>
+
+    </form>
+    <a href="history"><button>Received Donations</button></a>
+</body>
+</html>

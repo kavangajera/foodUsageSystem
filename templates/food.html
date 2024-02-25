@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donations</title>
+</head>
+<body>
+      <h1>Volunteers' requests in your city: </h1>
+      <form method="post">
+         {%csrf_token%}
+         {% if get_volunteers %}
+            {% for volunteer in get_volunteers %}
+            <input type="radio" id="vol" name="vol" value="{{volunteer.username}}">
+            <label for="vol">{{volunteer.username }}</label><br>
+            <p>{{volunteer.foodName}}</p>
+            <p>{{volunteer.quantity}}</p>
+            <p>{{volunteer.duedate}}</p>
+            <br><br><br>
+            {% endfor %}
+        {%else%}
+            <p>No volunteers found in your city</p>
+         {%endif%}
+         <button type="submit">Donate</button>
+      </form>
+</body>
+</html>

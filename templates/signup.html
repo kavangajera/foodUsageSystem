@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        
+        <!-- Username -->
+        <div>
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" id="id_username" required>
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label for="id_password">Password:</label>
+            <input type="password" name="password" id="id_password" required>
+        </div>
+        <div>
+            <label for="id_password">Confirm Password:</label>
+            <input type="password" name="confirm_password" id="id_password" required>
+        </div>
+        <!-- Email -->
+        <div>
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" id="id_email" required>
+        </div>
+       
+        <!-- Role -->
+        <div>
+            <label for="id_role">Role:</label>
+            <select name="role" id="id_role" required>
+                <option value="volunteer">Volunteer</option>
+                <option value="donator">Donator</option>
+            </select>
+        </div>
+        <!-- Phone -->
+        <div>
+            <label for="id_email">Phone:</label>
+            <input type="phone" name="phone" id="id_email" required>
+        </div>
+        <!-- Submit Button -->
+        <div>
+            <button type="submit">Sign Up</button>
+        </div>
+    </form>
+
+</body>
+</html>

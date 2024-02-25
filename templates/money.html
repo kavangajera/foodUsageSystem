@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Money</title>
+</head>
+<body>
+    <form  method="post">
+        {%csrf_token%}
+        <label for="vol">Select Volunteers: </label><br><br>
+        {% if get_volunteers %}
+        <select name="vol" id="vol" required>
+            {% for volunteer in get_volunteers %}
+            <option value="{{volunteer.username}}">{{volunteer.username}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        {%else%}
+           <p>No volunteers found in your city</p>
+        {%endif%}
+        <label for="amount">Donate Amount: </label>
+        <input type="number" name="amount">
+
+        <label for="comment">Reason: </label>
+        <input type="text" name="reason">
+        <button type="submit">Donate</button>
+</form>
+</body>
+</html>

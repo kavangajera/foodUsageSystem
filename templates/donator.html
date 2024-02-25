@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donator</title>
+</head>
+<body>
+    {% if request.session.user_username %}
+    <p>Logged in as: {{ request.session.user_username }}</p>
+{% else %}
+    <p>Not logged in</p>
+{% endif %}
+    <form action="{% url 'donator' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="city">City: </label>
+            <select name="city" id="city" required>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Nadiad">Nadiad</option>
+                <option value="Junagadh">Junagadh</option>
+            </select>
+        </div>
+        <div>
+            
+            <button type="submit">Save</button>
+            <a href="chooseDonate">Choose Ways to Donate</a>
+        </div>
+    </form>
+</body>
+</html>

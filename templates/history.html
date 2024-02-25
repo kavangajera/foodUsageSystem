@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation History</title>
+</head>
+<body>
+    {%csrf_token%}
+    <h1>Successfully Received Donations: </h1>
+
+         <h3>Money Donated: </h3>
+         {% if get_money_details %}
+            {% for donor in get_money_details %}
+            
+            <p>{{donor.donor}}</p>
+            <p>{{donor.amount}}</p>
+            <p>{{donor.reason}}</p>
+            <p>{{donor.date}}</p>
+            <br><br><br>
+            {% endfor %}
+        {%else%}
+            <p>No volunteers found in your city</p>
+         {%endif%}
+
+         <h3>Food Donated: </h3>
+         {% if get_food_details %}
+            {% for donor in get_food_details %}
+            
+            <p>{{donor.donor}}</p>
+            <p>{{donor.date}}</p>
+            <br><br><br>
+            {% endfor %}
+        {%else%}
+            <p>No volunteers found in your city</p>
+         {%endif%}
+</body>
+</html>
