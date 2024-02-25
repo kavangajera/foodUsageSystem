@@ -6,11 +6,14 @@
     <title>Donator</title>
 </head>
 <body>
+{% if user.is_authenticated%}
+    <a href="{% url 'logout_view' %}"><button>Logout</button></a>
     {% if request.session.user_username %}
     <p>Logged in as: {{ request.session.user_username }}</p>
-{% else %}
+    {% else %}
+    <a href="logout"><button>Logout</button></a>
     <p>Not logged in</p>
-{% endif %}
+    {% endif %}
     <form action="{% url 'donator' %}" method="post">
         {% csrf_token %}
         <div>
@@ -23,9 +26,10 @@
         </div>
         <div>
             
-            <button type="submit">Save</button>
+            <button type="submit">Save</button><br><br>
             <a href="chooseDonate">Choose Ways to Donate</a>
         </div>
     </form>
+{%endif%}
 </body>
 </html>

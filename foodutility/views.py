@@ -22,11 +22,11 @@ def signup(request):
             return redirect('homepage')
         
         if(password!=confirm_password):
-            messages.error(request,"invalid phone number")
+            messages.error(request,"enter correct as above password")
             return redirect('homepage')
         user = CustomUser.objects.create_user(username=username, password=password, email=email, role=role,phone=phone)
         
-        return redirect('signup')  
+        return redirect('login_view')  
 
     return render(request, 'signup.html')
 
@@ -83,6 +83,7 @@ def donator(request):
     return render(request,'donator.html')
 
 def money(request):
+    
     if request.method == 'POST':
         donor = request.user.username
         volunteer = request.POST.get('vol')
@@ -91,20 +92,27 @@ def money(request):
         date = datetime.today()
         md = Donate_Money(donor=donor,volunteer=volunteer,amount=amount,reason=reason,date=date)
         md.save()
-    donor_detail = Donor_Detail.objects.filter(username=request.user.username).last()
-    get_city = donor_detail.city
-    get_volunteers = Volunteer_Detail.objects.filter(city=get_city)
-    return render(request,'money.html',{'get_volunteers': get_volunteers})
-def food(request):
-    donor = request.user.username
-    volunteer = request.POST.get('vol')
-    date = datetime.today()
-    fd = Donate_Food(donor=donor,volunteer=volunteer,date=date)
-    fd.save()
     donor_detail = Donor_Detail.objects.filter(username=request.user.username).first()
     get_city = donor_detail.city
     get_volunteers = Volunteer_Detail.objects.filter(city=get_city)
-    return render(request,'food.html',{'get_volunteers': get_volunteers})
+    return render(request,'money.html',{'get_volunteers': get_volunteers})
+
+def food(request):
+    if request.method == 'POST':
+       donor = request.user.username
+       volunteer = request.POST.get('vol')
+       food_detail = Volunteer_Detail.objects.filter(username=volunteer).first()
+       foodname = food_detail.foodName
+       quantity = food_detail.quantity
+       date = datetime.today()
+       fd = Donate_Food(donor=donor,volunteer=volunteer,foodName=foodname,quantity=quantity,date=date)
+       fd.save()
+       food_detail.delete()
+    donor_detail = Donor_Detail.objects.filter(username=request.user.username).first()
+    get_city = donor_detail.city
+    get_volunteers = Volunteer_Detail.objects.filter(city=get_city)
+    
+    return render(request,'food.html',{'get_volunteers': get_volunteers})   
 
 def chooseDonate(request):
     return render(request,'donation_options.html')

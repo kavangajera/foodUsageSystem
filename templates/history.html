@@ -7,6 +7,8 @@
 </head>
 <body>
     {%csrf_token%}
+{% if user.is_authenticated%}
+    <a href="{% url 'logout_view' %}"><button>Logout</button></a>
     <h1>Successfully Received Donations: </h1>
 
          <h3>Money Donated: </h3>
@@ -28,11 +30,14 @@
             {% for donor in get_food_details %}
             
             <p>{{donor.donor}}</p>
+            <p>{{donor.foodName}}</p>
+            <p>{{donor.quantity}}</p>
             <p>{{donor.date}}</p>
             <br><br><br>
             {% endfor %}
         {%else%}
             <p>No volunteers found in your city</p>
          {%endif%}
+{%endif%}
 </body>
 </html>

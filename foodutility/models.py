@@ -43,7 +43,8 @@ class Donate_Money(models.Model):
 class Donate_Food(models.Model):
     donor = models.CharField(max_length=122, blank=True, null=True)
     volunteer = models.CharField(max_length=122, blank=True, null=True)
-    # foodname = models.CharField(max_length=122, blank=True, null=True)
+    foodName =  models.CharField(max_length=122, blank=True, null=True)
+    quantity =  models.CharField(max_length=122, blank=True, null=True)
     date = models.DateTimeField()
     def __str__(self):
         return self.donor

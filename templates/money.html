@@ -6,6 +6,8 @@
     <title>Donate Money</title>
 </head>
 <body>
+{% if user.is_authenticated%}
+    <a href="{% url 'logout_view' %}"><button>Logout</button></a>
     <form  method="post">
         {%csrf_token%}
         <label for="vol">Select Volunteers: </label><br><br>
@@ -26,5 +28,6 @@
         <input type="text" name="reason">
         <button type="submit">Donate</button>
 </form>
+{%endif%}
 </body>
 </html>

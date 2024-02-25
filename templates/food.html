@@ -6,6 +6,8 @@
     <title>Food Donations</title>
 </head>
 <body>
+{% if user.is_authenticated%}
+    <a href="{% url 'logout_view' %}"><button>Logout</button></a>
       <h1>Volunteers' requests in your city: </h1>
       <form method="post">
          {%csrf_token%}
@@ -23,5 +25,6 @@
          {%endif%}
          <button type="submit">Donate</button>
       </form>
+{%endif%}
 </body>
 </html>
